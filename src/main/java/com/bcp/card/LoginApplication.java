@@ -1,6 +1,7 @@
 package com.bcp.card;
 
 import com.bcp.card.login.business.SendSmsService;
+import com.bcp.card.login.model.api.AuthenticationForm;
 import io.r2dbc.spi.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -38,6 +39,9 @@ public class LoginApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//sendSmsService.enviarSms("123476", "945418763");
-		//sendSmsService.enviarSms("123476", "940007203");
+
+		AuthenticationForm authenticationForm = new AuthenticationForm();
+		authenticationForm.setPhoneNumber("940007203");
+		//sendSmsService.sendSms(authenticationForm);
 	}
 }

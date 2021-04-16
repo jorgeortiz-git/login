@@ -1,6 +1,7 @@
 package com.bcp.card.login.business.impl;
 
 import com.bcp.card.login.business.LoginService;
+import com.bcp.card.login.business.SendSmsService;
 import com.bcp.card.login.dao.UserRepository;
 import com.bcp.card.login.model.api.UserForm;
 import com.bcp.card.login.model.api.UserResponse;
@@ -16,6 +17,9 @@ public class LoginServiceImpl implements LoginService {
 
   @Autowired
   UserRepository userRepository;
+
+  @Autowired
+  SendSmsService sendSmsService;
 
   @Override
   public Mono<UserResponse> userLogin(UserForm userForm) {

@@ -1,5 +1,8 @@
 package com.bcp.card.login.business;
 
+import com.bcp.card.login.model.api.AuthenticationForm;
+import reactor.core.publisher.Mono;
+
 public interface SendSmsService {
-	void enviarSms(String codigo, String numeroTelefono);
+	Mono<Void> sendSms(String phoneNumber);
 }

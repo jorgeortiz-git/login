@@ -1,6 +1,8 @@
 package com.bcp.card.login.expose.web;
 
 import com.bcp.card.login.business.LoginService;
+import com.bcp.card.login.business.SendSmsService;
+import com.bcp.card.login.model.api.AuthenticationForm;
 import com.bcp.card.login.model.api.UserForm;
 import com.bcp.card.login.model.api.UserResponse;
 import com.bcp.card.login.model.entity.User;
@@ -18,9 +20,18 @@ public class LoginController {
   @Autowired
   LoginService loginService;
 
+  @Autowired
+  SendSmsService sendSmsService;
+
   @PostMapping
   public Mono<UserResponse> login(@RequestBody UserForm userFormMono){
     return loginService.userLogin(userFormMono);
+  }
+
+  @PostMapping("/sendMessage")
+  public void sendMessage(@RequestBody AuthenticationForm authenticationForm){
+    //return
+            //sendSmsService.sendSms(authenticationForm);
   }
 
 
