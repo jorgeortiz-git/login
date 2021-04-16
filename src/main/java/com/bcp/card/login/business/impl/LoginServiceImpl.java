@@ -8,10 +8,7 @@ import com.bcp.card.login.model.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.ls.LSOutput;
 import reactor.core.publisher.Mono;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 @Slf4j
@@ -24,13 +21,23 @@ public class LoginServiceImpl implements LoginService {
   public Mono<UserResponse> userLogin(UserForm userForm) {
     return this.userRepository
             .findByUsernameAndPassword(userForm.getUsername(), userForm.getPassword())
-            .map(this::usertoUserResponse);
+            .map(this::responseUserOk)
+            .switchIfEmpty(responseUserDenied());
   }
 
-  private UserResponse usertoUserResponse(User user) {
+  private UserResponse responseUserOk(User user) {
     return UserResponse.builder()
+            .status(200)
             .email(user.getEmail())
             .phoneNumber(user.getPhoneNumber())
             .build();
   }
+
+  private Mono<UserResponse> responseUserDenied() {
+    Mono<UserResponse> userResponseMono = Mono.just(UserResponse.builder()
+            .status(500)
+            .build());
+    return userResponseMono;
+  }
+
 }
