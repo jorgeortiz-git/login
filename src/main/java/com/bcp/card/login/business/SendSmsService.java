@@ -4,5 +4,5 @@ import com.bcp.card.login.model.api.AuthenticationForm;
 import reactor.core.publisher.Mono;
 
 public interface SendSmsService {
-	Mono<Void> sendSms(String phoneNumber);
+	Mono<String> sendSms(AuthenticationForm authenticationForm);
 }

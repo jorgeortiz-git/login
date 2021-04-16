@@ -22,20 +22,19 @@ public class SendSmsServiceImpl implements SendSmsService {
 	TwilioRepository twilioRepository;
 
 	@Override
-	public Mono<Void> sendSms(String phoneNumber) {
-
-		String codigo = generateRandomCode();
-		TwilioAccout twilio = twilioRepository.findAll().blockFirst();
+	public Mono<String> sendSms(AuthenticationForm authenticationForm) {
 		
-		String ACCOUNT_SID = twilio.getAccountSid();
-		String AUTH_TOKEN = twilio.getAuthToken();
-		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-
-		String mensaje = "Su codigo de verificacion es: " + codigo;
-		log.info(mensaje);
-
-		//Message message = Message.creator(new PhoneNumber("+51" + authenticationForm.getPhoneNumber()), new PhoneNumber(twilio.getPhoneNumber()), mensaje).create();
-		return null;
+		String codigo = generateRandomCode();
+		return twilioRepository.findById(1)
+						.map(twilioAccout -> {
+							Twilio.init(twilioAccout.getAccountSid(),
+											twilioAccout.getAuthToken());
+							String mensaje = "Su codigo de verificacion es: " + codigo;
+							Message.creator(new PhoneNumber("+51" + authenticationForm.getPhoneNumber()),
+											new PhoneNumber(twilioAccout.getPhoneNumber()), mensaje)
+											.create();
+							return codigo;
+						});
 	}
 
 	private String generateRandomCode() {

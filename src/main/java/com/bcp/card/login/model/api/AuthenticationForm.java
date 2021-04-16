@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class AuthenticationForm {
   private String phoneNumber;
+  private Integer id;
 }
