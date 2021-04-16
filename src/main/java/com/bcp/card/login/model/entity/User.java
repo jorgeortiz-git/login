@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @ToString
-@Table(value = "USUARIO")
+@Table(value = "equipo4.USUARIO")
 public class User {
   @Id
   private Integer id;

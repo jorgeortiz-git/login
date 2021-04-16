@@ -17,7 +17,7 @@ public class SendSmsServiceImpl implements SendSmsService {
 
 	@Override
 	public void enviarSms(String codigo, String numeroTelefono) {
-		TwilioAccout twilio = twilioRepository.findById(1).block();
+		TwilioAccout twilio = twilioRepository.findAll().blockFirst();
 		
 		String ACCOUNT_SID = twilio.getAccountSid();
 		String AUTH_TOKEN = twilio.getAuthToken();

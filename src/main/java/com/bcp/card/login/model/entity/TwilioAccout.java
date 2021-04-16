@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Data
 @ToString
-@Table("TWILIO_ACCOUNT")
+@Table("equipo4.TWILIO_ACCOUNT")
 public class TwilioAccout implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
